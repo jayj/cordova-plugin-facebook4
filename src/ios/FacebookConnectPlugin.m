@@ -386,7 +386,7 @@
         content.title = params[@"title"];
 
         self.gameRequestDialogCallbackId = command.callbackId;
-        dialog.content = content;FBSDKApplicationDelegate
+        dialog.content = content;
         [dialog show];
         return;
     }
@@ -512,7 +512,7 @@
     [self.commandDelegate runInBackground:^{
         // For more verbose output on logging uncomment the following:
         // [FBSettings setLoggingBehavior:[NSSet setWithObject:FBLoggingBehaviorAppEvents]];
-        BOOL *flag = [command.arguments objectAtIndex:0];
+        BOOL flag = [[command.arguments objectAtIndex:0] boolValue];
         CDVPluginResult *res;
 
         [FBSDKSettings setAutoLogAppEventsEnabled:flag];
@@ -533,7 +533,7 @@
     [self.commandDelegate runInBackground:^{
         // For more verbose output on logging uncomment the following:
         // [FBSettings setLoggingBehavior:[NSSet setWithObject:FBLoggingBehaviorAppEvents]];
-        BOOL *flag = [command.arguments objectAtIndex:0];
+        BOOL flag = [[command.arguments objectAtIndex:0] boolValue];
         CDVPluginResult *res;
 
         [FBSDKSettings setAutoLogAppEventsEnabled:flag];
