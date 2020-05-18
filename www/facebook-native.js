@@ -57,3 +57,15 @@ exports.activateApp = function (s, f) {
 exports.getDeferredApplink = function (s, f) {
 	  exec(s, f, 'FacebookConnectPlugin', 'getDeferredApplink', [])
 }
+
+exports.setAutoLogAppEventsEnabled = function(flag, s, f) {
+  exec(s, f, 'FacebookConnectPlugin', 'setAutoLogAppEventsEnabled', [flag]);
+};
+
+exports.setAutoInitEnabled = function(flag, s, f) {
+  exec(s, f, 'FacebookConnectPlugin', 'setAutoInitEnabled', [flag]);
+};
+
+exports.fullyInitialize = function logout (s, f) {
+  exec(s, f, 'FacebookConnectPlugin', 'fullyInitialize', [])
+}

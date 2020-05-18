@@ -386,7 +386,7 @@
         content.title = params[@"title"];
 
         self.gameRequestDialogCallbackId = command.callbackId;
-        dialog.content = content;
+        dialog.content = content;FBSDKApplicationDelegate
         [dialog show];
         return;
     }
@@ -498,6 +498,61 @@
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
         }
+    }];
+}
+
+- (void)setAutoLogAppEventsEnabled:(CDVInvokedUrlCommand *)command {
+    if ([command.arguments count] == 0) {
+        // Not enough arguments
+        CDVPluginResult *res = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Invalid arguments"];
+        [self.commandDelegate sendPluginResult:res callbackId:command.callbackId];
+        return;
+    }
+
+    [self.commandDelegate runInBackground:^{
+        // For more verbose output on logging uncomment the following:
+        // [FBSettings setLoggingBehavior:[NSSet setWithObject:FBLoggingBehaviorAppEvents]];
+        BOOL *flag = [command.arguments objectAtIndex:0];
+        CDVPluginResult *res;
+
+        [FBSDKSettings setAutoLogAppEventsEnabled:flag];
+       
+        res = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:res callbackId:command.callbackId];
+    }];
+}
+
+- (void)setAutoInitEnabled:(CDVInvokedUrlCommand *)command {
+    if ([command.arguments count] == 0) {
+        // Not enough arguments
+        CDVPluginResult *res = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Invalid arguments"];
+        [self.commandDelegate sendPluginResult:res callbackId:command.callbackId];
+        return;
+    }
+
+    [self.commandDelegate runInBackground:^{
+        // For more verbose output on logging uncomment the following:
+        // [FBSettings setLoggingBehavior:[NSSet setWithObject:FBLoggingBehaviorAppEvents]];
+        BOOL *flag = [command.arguments objectAtIndex:0];
+        CDVPluginResult *res;
+
+        [FBSDKSettings setAutoLogAppEventsEnabled:flag];
+       
+        res = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:res callbackId:command.callbackId];
+    }];
+}
+
+- (void)fullyInitialize:(CDVInvokedUrlCommand *)command {
+    [self.commandDelegate runInBackground:^{
+        // For more verbose output on logging uncomment the following:
+        // [FBSettings setLoggingBehavior:[NSSet setWithObject:FBLoggingBehaviorAppEvents]];
+        CDVPluginResult *res;
+
+        [FBSDKApplicationDelegate initializeSDK:nil];
+       
+        res = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:res callbackId:command.callbackId];
     }];
 }
 

@@ -28,4 +28,7 @@
 - (void)showDialog:(CDVInvokedUrlCommand *)command;
 - (void)getDeferredApplink:(CDVInvokedUrlCommand *) command;
 - (void)activateApp:(CDVInvokedUrlCommand *)command;
+- (void)setAutoLogAppEventsEnabled:(CDVInvokedUrlCommand *)command;
+- (void)setAutoInitEnabled:(CDVInvokedUrlCommand *)command;
+- (void)fullyInitialize:(CDVInvokedUrlCommand *)command;
 @end

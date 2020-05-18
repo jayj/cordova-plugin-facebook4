@@ -310,6 +310,15 @@ public class ConnectPlugin extends CordovaPlugin {
             });
 
             return true;
+        } else if (action.equals("setAutoLogAppEventsEnabled")) {
+            executeSetAutoLogAppEventsEnabled(args, callbackContext);
+            return true;
+        } else if (action.equals("setAutoInitEnabled")) {
+            executeSetAutoInitEnabled(args, callbackContext);
+            return true;
+        } else if (action.equals("fullyInitialize")) {
+            executeFullyInitialize(args, callbackContext);
+            return true;
         }
         return false;
     }
@@ -704,6 +713,55 @@ public class ConnectPlugin extends CordovaPlugin {
         } else {
             // Request new read permissions
             LoginManager.getInstance().logInWithReadPermissions(cordova.getActivity(), permissions);
+        }
+    }
+
+    private void executeSetAutoLogAppEventsEnabled(JSONArray args, final CallbackContext callbackContext) {
+        if (args.length() != 1) {
+            // We expect a single boolean parameter
+            callbackContext.error("Invalid arguments");
+            return;
+        }
+
+        Log.d(TAG, "executeSetAutoLogAppEventsEnabled");
+
+        try {
+            boolean flag = args.getBoolean(0);
+            FacebookSdk.setAutoLogAppEventsEnabled(flag);
+            callbackContext.success();
+        } catch (JSONException e) {
+            Log.w(TAG, "Non-boolean method parameter provided to executeSetAutoLogAppEventsEnabled");
+            callbackContext.error("Invalid arguments");
+        }
+    }
+
+    private void executeSetAutoInitEnabled(JSONArray args, final CallbackContext callbackContext) {
+        if (args.length() != 1) {
+            // We expect a single boolean parameter
+            callbackContext.error("Invalid arguments");
+            return;
+        }
+
+        Log.d(TAG, "executeSetAutoInitEnabled");
+
+        try {
+            boolean flag = args.getBoolean(0);
+            FacebookSdk.setAutoInitEnabled(flag);
+            callbackContext.success();
+        } catch (JSONException e) {
+            Log.w(TAG, "Non-boolean method parameter provided to executeSetAutoInitEnabled");
+            callbackContext.error("Invalid arguments");
+        }
+    }
+
+    private void executeFullyInitialize(JSONArray args, final CallbackContext callbackContext) {
+        Log.d(TAG, "executeFullyInitialize");
+
+        try {
+            FacebookSdk.fullyInitialize();
+            callbackContext.success();
+        } catch (JSONException e) {
+            Log.d(TAG, "FB SDK cannot be initialized");
         }
     }
 
