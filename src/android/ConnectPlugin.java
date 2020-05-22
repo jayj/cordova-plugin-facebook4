@@ -729,7 +729,7 @@ public class ConnectPlugin extends CordovaPlugin {
             boolean flag = args.getBoolean(0);
             FacebookSdk.setAutoLogAppEventsEnabled(flag);
             callbackContext.success();
-        } catch (JSONException e) {
+        } catch (Exception e) {
             Log.w(TAG, "Non-boolean method parameter provided to executeSetAutoLogAppEventsEnabled");
             callbackContext.error("Invalid arguments");
         }
@@ -748,7 +748,7 @@ public class ConnectPlugin extends CordovaPlugin {
             boolean flag = args.getBoolean(0);
             FacebookSdk.setAutoInitEnabled(flag);
             callbackContext.success();
-        } catch (JSONException e) {
+        } catch (Exception e) {
             Log.w(TAG, "Non-boolean method parameter provided to executeSetAutoInitEnabled");
             callbackContext.error("Invalid arguments");
         }
@@ -760,7 +760,7 @@ public class ConnectPlugin extends CordovaPlugin {
         try {
             FacebookSdk.fullyInitialize();
             callbackContext.success();
-        } catch (JSONException e) {
+        } catch (Exception e) {
             Log.d(TAG, "FB SDK cannot be initialized");
         }
     }
